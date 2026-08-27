@@ -38,7 +38,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
             return;
         }
-        //just checking git hub
         String path = request.getServletPath();
         if (path.equals("/auth/signup") || path.equals("/resend")) {
             filterChain.doFilter(request, response); // skip JWT

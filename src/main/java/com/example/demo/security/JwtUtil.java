@@ -8,9 +8,10 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
-
+@Component
 public class JwtUtil {
     private static final String SECRET_KEY = "rep1ace_this_with_256bit_secret_key_rep1ace_this_with";
     private static final long EXPIRATION_TIME = 1000 * 60 * 60 * 24 * 3;

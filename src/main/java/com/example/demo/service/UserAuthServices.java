@@ -7,6 +7,7 @@ import com.example.demo.Repository.UserRepo;
 import com.example.demo.dto.UserResponse;
 import com.example.demo.entity.Role;
 import com.example.demo.entity.User;
+import com.example.demo.security.UserPrinciple;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -41,10 +42,10 @@ public class UserAuthServices implements UserDetailsService {
         User user1 = userMapper.toEntity(userDTO,role);
         user1.setPasswordHash(passwordEncoder.encode(userDTO.getPassword()));
         user1 = userRepo.save(user1);
+
         return user1;
     }
 
-    @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepo.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Email is not regidstere"));
