@@ -1,10 +1,13 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.UserResponse;
+import com.example.demo.dto.WalletResponse;
 import com.example.demo.entity.User;
+import com.example.demo.entity.Wallet;
 import com.example.demo.security.JwtUtil;
 import com.example.demo.security.UserPrinciple;
 import com.example.demo.service.UserAuthServices;
+import com.example.demo.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +30,9 @@ public class UserController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
+    private WalletService walletService;
+
+    @Autowired
     private JwtUtil jwtUtil;
 
     @PostMapping("/signup")
@@ -37,6 +43,9 @@ public class UserController {
 
         UserPrinciple principle = new UserPrinciple(user);
         String token = jwtUtil.generateToken(principle);
+
+
+        walletService.createWallet(user);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
