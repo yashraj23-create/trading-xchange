@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class Check {
     @GetMapping
     public String checker(){
+
+        System.out.println("Merger feature");
         return "hey its all right";
     }
 }
